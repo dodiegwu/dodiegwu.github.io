@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Otito-Diluchuckwu Odiegwu — FP&A Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fafaf8;
+      --surface: #f3f2ee;
+      --border: rgba(0,0,0,0.1);
+      --border-mid: rgba(0,0,0,0.18);
+      --text: #1a1a18;
+      --muted: #6b6b65;
+      --hint: #a8a89f;
+      --tag-budget-bg: #E1F5EE; --tag-budget-text: #085041;
+      --tag-model-bg: #E6F1FB;  --tag-model-text: #0C447C;
+      --tag-analysis-bg: #EEEDFE; --tag-analysis-text: #3C3489;
+      --tag-neutral-bg: #f0efe9; --tag-neutral-text: #5a5a54;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111110;
+        --surface: #1c1c1a;
+        --border: rgba(255,255,255,0.1);
+        --border-mid: rgba(255,255,255,0.18);
+        --text: #f0efe9;
+        --muted: #9a9a92;
+        --hint: #5a5a54;
+        --tag-budget-bg: #04342C; --tag-budget-text: #9FE1CB;
+        --tag-model-bg: #042C53; --tag-model-text: #B5D4F4;
+        --tag-analysis-bg: #26215C; --tag-analysis-text: #CECBF6;
+        --tag-neutral-bg: #2C2C2A; --tag-neutral-text: #B4B2A9;
+      }
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.7;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      border-bottom: 0.5px solid var(--border);
+      padding-bottom: 2.75rem;
+      margin-bottom: 2.75rem;
+    }
+
+    .initials {
+      width: 54px; height: 54px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 0.5px solid var(--border-mid);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; font-weight: 500;
+      color: var(--muted);
+      margin-bottom: 1.75rem;
+    }
+
+    .name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(30px, 5vw, 42px);
+      font-weight: 300;
+      letter-spacing: -0.5px;
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+    }
+
+    .tagline {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 540px;
+      font-weight: 300;
+    }
+
+    .nav-pills {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      margin-top: 1.75rem;
+    }
+
+    .pill {
+      font-size: 12px;
+      padding: 5px 14px;
+      border-radius: 99px;
+      border: 0.5px solid var(--border-mid);
+      color: var(--muted);
+      background: transparent;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .pill:hover, .pill.active {
+      background: var(--surface);
+      color: var(--text);
+    }
+
+    /* ── Section label ── */
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: var(--hint);
+      margin-bottom: 1.25rem;
+    }
+
+    /* ── Project cards ── */
+    .projects { display: flex; flex-direction: column; }
+
+    .project-card {
+      border-top: 0.5px solid var(--border);
+      padding: 1.6rem 0;
+      cursor: pointer;
+      transition: padding-left 0.2s ease;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: start;
+    }
+
+    .project-card:hover { padding-left: 0.5rem; }
+    .project-card:last-child { border-bottom: 0.5px solid var(--border); }
+
+    .project-num {
+      font-size: 11px;
+      color: var(--hint);
+      font-variant-numeric: tabular-nums;
+      margin-bottom: 0.4rem;
+    }
+
+    .project-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px;
+      font-weight: 400;
+      margin-bottom: 0.45rem;
+      line-height: 1.3;
+    }
+
+    .project-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 540px;
+    }
+
+    .project-tags {
+      display: flex; gap: 6px; flex-wrap: wrap;
+      margin-top: 0.85rem;
+    }
+
+    .tag {
+      font-size: 11px;
+      padding: 3px 9px;
+      border-radius: 4px;
+    }
+    .tag.budget   { background: var(--tag-budget-bg);   color: var(--tag-budget-text); }
+    .tag.model    { background: var(--tag-model-bg);    color: var(--tag-model-text); }
+    .tag.analysis { background: var(--tag-analysis-bg); color: var(--tag-analysis-text); }
+    .tag.neutral  { background: var(--tag-neutral-bg);  color: var(--tag-neutral-text); }
+
+    .arrow {
+      font-size: 16px;
+      color: var(--hint);
+      padding-top: 6px;
+      transition: transform 0.2s, color 0.2s;
+    }
+
+    .project-card:hover .arrow {
+      transform: translate(3px, -3px);
+      color: var(--text);
+    }
+
+    /* ── Expanded detail ── */
+    .expanded-detail {
+      display: none;
+      margin-top: 1.1rem;
+      padding: 1.25rem;
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+    }
+    .expanded-detail.open { display: block; }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .detail-item label {
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--hint);
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .detail-item span {
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    /* ── Skills ── */
+    .skills-row {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 0.5px solid var(--border);
+    }
+
+    .skills-grid {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .skill-chip {
+      font-size: 12px;
+      padding: 5px 14px;
+      border-radius: 99px;
+      border: 0.5px solid var(--border);
+      color: var(--muted);
+    }
+
+    /* ── Contact ── */
+    .contact-row {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 0.5px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .contact-note {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    .contact-links { display: flex; gap: 16px; align-items: center; }
+
+    .contact-link {
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 0.5px solid var(--border-mid);
+      padding-bottom: 1px;
+      transition: color 0.15s;
+    }
+    .contact-link:hover { color: var(--text); }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: 4rem;
+      padding-top: 1.5rem;
+      border-top: 0.5px solid var(--border);
+      font-size: 11px;
+      color: var(--hint);
+      letter-spacing: 0.5px;
+    }
+
+    @media (max-width: 520px) {
+      .container { padding: 2.5rem 1.25rem 4rem; }
+      .detail-grid { grid-template-columns: 1fr; }
+      .contact-row { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Hero -->
+    <header class="hero">
+      <div class="initials">OD</div>
+      <h1 class="name">Otito-Diluchuckwu Odiegwu</h1>
+      <p class="tagline">Anthropology mind, finance focus: bridging human insight and data-driven strategy from healthcare to FP&amp;A.</p>
+      <nav class="nav-pills">
+        <button class="pill active" onclick="filterProjects('all', this)">All projects</button>
+        <button class="pill" onclick="filterProjects('Budgeting', this)">Budgeting &amp; Forecasting</button>
+        <button class="pill" onclick="filterProjects('Modeling', this)">Financial Modeling</button>
+        <button class="pill" onclick="filterProjects('Analysis', this)">Financial Analysis</button>
+      </nav>
+    </header>
+
+    <!-- Projects -->
+    <p class="section-label">Selected work</p>
+    <div class="projects" id="projects-list">
+
+      <article class="project-card" data-category="Budgeting" onclick="toggleExpand(this)">
+        <div>
+          <div class="project-num">01</div>
+          <h2 class="project-title">Practice Budget Template</h2>
+          <p class="project-desc">Designed a reusable, structured budget template to support financial planning workflows — covering revenue assumptions, expense categories, and monthly tracking with built-in variance logic.</p>
+          <div class="project-tags">
+            <span class="tag budget">Budgeting &amp; Forecasting</span>
+            <span class="tag neutral">Excel</span>
+            <span class="tag neutral">Template Design</span>
+          </div>
+          <div class="expanded-detail">
+            <div class="detail-grid">
+              <div class="detail-item"><label>Type</label><span>Reusable template</span></div>
+              <div class="detail-item"><label>Tools used</label><span>Excel</span></div>
+              <div class="detail-item"><label>Focus area</label><span>Budgeting structure &amp; variance logic</span></div>
+              <div class="detail-item"><label>Context</label><span>Independent practice project</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="arrow">↗</div>
+      </article>
+
+      <article class="project-card" data-category="Modeling" onclick="toggleExpand(this)">
+        <div>
+          <div class="project-num">02</div>
+          <h2 class="project-title">CVS Revenue Forecast Model</h2>
+          <p class="project-desc">Built a forward-looking revenue forecast model for CVS Health, projecting top-line performance using historical trends, segment assumptions, and scenario analysis across pharmacy, retail, and health services divisions.</p>
+          <div class="project-tags">
+            <span class="tag model">Financial Modeling</span>
+            <span class="tag neutral">Forecasting</span>
+            <span class="tag neutral">Healthcare</span>
+            <span class="tag neutral">Excel</span>
+          </div>
+          <div class="expanded-detail">
+            <div class="detail-grid">
+              <div class="detail-item"><label>Company</label><span>CVS Health</span></div>
+              <div class="detail-item"><label>Tools used</label><span>Excel</span></div>
+              <div class="detail-item"><label>Scope</label><span>Multi-segment revenue projection</span></div>
+              <div class="detail-item"><label>Industry</label><span>Healthcare / Retail</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="arrow">↗</div>
+      </article>
+
+      <article class="project-card" data-category="Analysis" onclick="toggleExpand(this)">
+        <div>
+          <div class="project-num">03</div>
+          <h2 class="project-title">CVS Financial Analysis</h2>
+          <p class="project-desc">Conducted a comprehensive financial analysis of CVS Health — examining profitability ratios, margin trends, and key performance drivers to assess the company's financial health and strategic positioning.</p>
+          <div class="project-tags">
+            <span class="tag analysis">Financial Analysis</span>
+            <span class="tag neutral">Ratio Analysis</span>
+            <span class="tag neutral">Healthcare</span>
+          </div>
+          <div class="expanded-detail">
+            <div class="detail-grid">
+              <div class="detail-item"><label>Company</label><span>CVS Health</span></div>
+              <div class="detail-item"><label>Tools used</label><span>Excel, PowerPoint</span></div>
+              <div class="detail-item"><label>Scope</label><span>Profitability &amp; margin analysis</span></div>
+              <div class="detail-item"><label>Industry</label><span>Healthcare / Retail</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="arrow">↗</div>
+      </article>
+
+      <article class="project-card" data-category="Budgeting" onclick="toggleExpand(this)">
+        <div>
+          <div class="project-num">04</div>
+          <h2 class="project-title">Multi-Department Budget Comparison</h2>
+          <p class="project-desc">Created a comparative budgeting analysis across multiple departments, enabling side-by-side tracking of spend, headcount, and resource allocation to surface inefficiencies and support strategic planning decisions.</p>
+          <div class="project-tags">
+            <span class="tag budget">Budgeting &amp; Forecasting</span>
+            <span class="tag neutral">Variance Analysis</span>
+            <span class="tag neutral">Excel</span>
+            <span class="tag neutral">Reporting</span>
+          </div>
+          <div class="expanded-detail">
+            <div class="detail-grid">
+              <div class="detail-item"><label>Scope</label><span>Cross-department comparison</span></div>
+              <div class="detail-item"><label>Tools used</label><span>Excel</span></div>
+              <div class="detail-item"><label>Focus area</label><span>Spend &amp; resource allocation</span></div>
+              <div class="detail-item"><label>Context</label><span>Independent practice project</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="arrow">↗</div>
+      </article>
+
+    </div>
+
+    <!-- Skills -->
+    <section class="skills-row">
+      <p class="section-label">Skills &amp; tools</p>
+      <div class="skills-grid">
+        <span class="skill-chip">Excel &amp; Power Query</span>
+        <span class="skill-chip">Financial Modeling</span>
+        <span class="skill-chip">Budgeting &amp; Forecasting</span>
+        <span class="skill-chip">Variance Analysis</span>
+        <span class="skill-chip">Revenue Forecasting</span>
+        <span class="skill-chip">Ratio Analysis</span>
+        <span class="skill-chip">Scenario Planning</span>
+        <span class="skill-chip">PowerPoint</span>
+        <span class="skill-chip">Data Storytelling</span>
+        <span class="skill-chip">Healthcare Finance</span>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <div class="contact-row">
+      <p class="contact-note">Open to FP&amp;A roles &amp; internships.</p>
+      <div class="contact-links">
+        <a class="contact-link" href="https://www.linkedin.com/in/otito-diluchuckwu-odiegwu" target="_blank">LinkedIn ↗</a>
+        <a class="contact-link" href="mailto:Dodiegwu@gmail.com">Email ↗</a>
+      </div>
+    </div>
+
+    <footer>
+      &copy; 2026 Otito-Diluchuckwu Odiegwu &nbsp;·&nbsp; FP&amp;A Portfolio
+    </footer>
+
+  </div>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    function toggleExpand(card) {
+      const detail = card.querySelector('.expanded-detail');
+      if (!detail) return;
+      const isOpen = detail.classList.contains('open');
+      document.querySelectorAll('.expanded-detail.open').forEach(d => d.classList.remove('open'));
+      if (!isOpen) detail.classList.add('open');
+    }
+
+    function filterProjects(category, btn) {
+      document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.project-card').forEach(card => {
+      
